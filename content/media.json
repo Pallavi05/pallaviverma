@@ -1,0 +1,23 @@
+{
+  "base": "https://pallaviverma.my.canva.site/_assets",
+  "files": [
+    { "from": "media/d3c8aeb7d1409dc696843576173815bc.jpg", "to": "assets/img/portrait.jpg",              "note": "hero poster + contact portrait, 2400px" },
+    { "from": "media/8b8d91bc633ec56225eb6a652bf3f8d3.jpg", "to": "assets/img/about.jpg",                 "note": "about photo, 2400px" },
+    { "from": "media/80bcf3b43264ccfcd22f2298c0145f20.jpg", "to": "assets/img/geetanjali.jpg",            "note": "1080px" },
+    { "from": "media/c6182c7a8b528d4c0ff9116b40af3449.jpg", "to": "assets/img/terms-and-conditions.jpg",  "note": "1390px" },
+    { "from": "media/6124a46ba3533041e2527e3dd972b58b.jpg", "to": "assets/img/still-01.jpg",              "note": "1600x2400" },
+    { "from": "media/8de8e2a297e4d88cd2289666f044a4ab.jpg", "to": "assets/img/still-02.jpg",              "note": "1600x2400" },
+    { "from": "media/5edc2d1f7daccdcd286b7f63d180fbe5.jpg", "to": "assets/img/still-03.jpg",              "note": "1080x808" },
+    { "from": "media/e5de087e62da4296a3b0b3710eb87c55.jpg", "to": "assets/img/still-04.jpg",              "note": "1600x900" },
+
+    { "from": "video/aca1e689229262759d293eba5ee69665.jpg", "to": "assets/img/wildflower.jpg",            "note": "video poster" },
+    { "from": "video/4187ec501abadd8580939a98fbb26921.jpg", "to": "assets/img/call-and-response.jpg",     "note": "video poster" },
+    { "from": "video/058848e975e65597011c9b6e6d973200.jpg", "to": "assets/img/green-park.jpg",            "note": "video poster" },
+
+    { "from": "video/6e614c41d141a0438f77c3a05f81a5ec.mp4", "to": "assets/video/hero.mp4",                "note": "12s ambient, silent, 1280px" },
+    { "from": "video/354f7987da23def4b21bed562e4fd9ab.mp4", "to": "assets/video/wildflower.mp4",          "note": "57s, 720x1280" },
+    { "from": "video/66c9a4f12de758ebc29e7f1cbd10b75b.mp4", "to": "assets/video/call-and-response.mp4",   "note": "33s, 848x478" },
+    { "from": "video/6d8ac693dd93a2b10c21fc42aa844e35.mp4", "to": "assets/video/green-park.mp4",          "note": "27s, 848x478" },
+    { "from": "video/9c18f907f704aa77211a41d554d2a316.mp4", "to": "assets/video/hero-portrait.mp4",       "note": "26s vertical clip from the old hero — unused, kept in case you want it" }
+  ]
+}

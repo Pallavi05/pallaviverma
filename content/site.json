@@ -1,0 +1,301 @@
+{
+  "meta": {
+    "name": "Pallavi Verma",
+    "role": "Performing Artist · Choreographer · Movement Director",
+    "url": "https://pallavi05.github.io/pallaviverma",
+    "description": "Pallavi Verma is a performing artist, choreographer and movement director based in New Delhi, working across contemporary dance, kathak, physical theatre and somatics."
+  },
+  "hero": {
+    "video": "assets/video/hero.mp4",
+    "poster": "assets/img/portrait.jpg",
+    "caption": "Wildflower, India Art Fair 2025"
+  },
+  "about": {
+    "portrait": "assets/img/about.jpg",
+    "body": [
+      "I am a performing artist with 9 years of training in dance and movement practices. My training background has been in contemporary dance, kathak, physical theatre, yoga, and somatics. I enjoy experimenting, playing, facilitating, and improvising with body movements coming from these practices and embodied experiences of the body.",
+      "My dance journey began with Sadhya Dance Company as an artist performing their in-house productions. For the last 8 years, I have consistently engaged in kathak training at Bharatiya Kala Kendra, Delhi, an institute for performing arts in classical dance and vocals. In 2020, I completed my Master's Degree in Dance (Performance Practice) from Ambedkar University.",
+      "I am also one of the members at Khuli Khirkee, a shared co-working space for professionals engaged in performing arts (previously known as Gati Dance Forum). Parallelly, I have been facilitating community classes as a way of self expression and well-being for the body."
+    ]
+  },
+  "education": [
+    {
+      "qualification": "Masters in Performance Practice (Dance)",
+      "years": "2018 – 2020",
+      "institution": "School of Creative and Cultural Expression, Ambedkar University, New Delhi"
+    },
+    {
+      "qualification": "B.E. in Computer Engineering",
+      "years": "2012 – 2016",
+      "institution": "Netaji Subhas Institute of Technology, Delhi University"
+    }
+  ],
+  "sections": [
+    {
+      "id": "performance",
+      "title": "Performance",
+      "note": "Stage and site works, as performer and choreographer.",
+      "items": [
+        {
+          "slug": "wildflower",
+          "title": "Wildflower",
+          "status": "Work in progress",
+          "year": "2025",
+          "role": "Solo performance & choreography",
+          "duration_min": null,
+          "media": {
+            "type": "video",
+            "src": "assets/video/wildflower.mp4",
+            "poster": "assets/img/wildflower.jpg"
+          },
+          "description": "A work-in-progress solo performance and choreography.",
+          "venues": [
+            "Serendipity Arts Festival, Goa — Dec 2024",
+            "India Art Fair, New Delhi — 2025"
+          ],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "geetanjali",
+          "title": "Geetanjali",
+          "status": "",
+          "year": "2024",
+          "role": "Performer",
+          "duration_min": 50,
+          "media": {
+            "type": "image",
+            "src": "assets/img/geetanjali.jpg",
+            "poster": ""
+          },
+          "description": "An experimental performance made as a collaboration between 8 dancers and 8 gardeners.",
+          "venues": [
+            "Bikaner House, New Delhi — Oct 2024"
+          ],
+          "credits": [
+            "Choreographed by Virgilio Sieni"
+          ],
+          "published": true
+        },
+        {
+          "slug": "call-and-response",
+          "title": "Call and Response",
+          "status": "",
+          "year": "2024",
+          "role": "Performer",
+          "duration_min": null,
+          "media": {
+            "type": "video",
+            "src": "assets/video/call-and-response.mp4",
+            "poster": "assets/img/call-and-response.jpg"
+          },
+          "description": "An improvised collaborative performance that blends music and dance, examining our physical reactions to soundscapes present in both natural and urban environments. It investigates the interplay between dancers and musicians, contemplating the comfort we derive from birdsong contrasted with the discomfort of city noise.",
+          "venues": [
+            "Nov 2024"
+          ],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "green-park",
+          "title": "Green Park",
+          "status": "",
+          "year": "2024",
+          "role": "Choreographer & performer",
+          "duration_min": null,
+          "media": {
+            "type": "video",
+            "src": "assets/video/green-park.mp4",
+            "poster": "assets/img/green-park.jpg"
+          },
+          "description": "Choreographed and performed in collaboration with the music band Green Park, set to their music, on the themes of aging, existential crisis and loneliness.",
+          "venues": [],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "sound-of-jyamiti",
+          "title": "Sound of Jyamiti",
+          "status": "",
+          "year": "2022 – 2023",
+          "role": "Co-choreographer & performer",
+          "duration_min": 30,
+          "media": {
+            "type": "youtube",
+            "src": "eK164lXf50k",
+            "poster": ""
+          },
+          "description": "A duet piece exploring body percussion and experimentation with kathak bols.",
+          "venues": [
+            "March Dance Festival, Chennai — 2023"
+          ],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "terms-and-conditions-apply",
+          "title": "Terms and Conditions Apply",
+          "status": "",
+          "year": "2022",
+          "role": "Performer",
+          "duration_min": 40,
+          "media": {
+            "type": "image",
+            "src": "assets/img/terms-and-conditions.jpg",
+            "poster": ""
+          },
+          "description": "A 40-minute ensemble work.",
+          "venues": [
+            "Serendipity Arts Festival — 2022",
+            "Kampnagel Biennale, Hamburg, Germany — Feb 2020"
+          ],
+          "credits": [
+            "Choreographed by Aseng Borang"
+          ],
+          "published": true
+        }
+      ]
+    },
+    {
+      "id": "film",
+      "title": "Film",
+      "note": "Dance films and music videos.",
+      "items": [
+        {
+          "slug": "dance-film-sunil-kothari-award",
+          "title": "Dance Film",
+          "status": "",
+          "year": "2025",
+          "role": "Performer",
+          "duration_min": null,
+          "media": {
+            "type": "youtube",
+            "src": "XS4ITeMg4L4",
+            "poster": ""
+          },
+          "description": "Made as part of the Sunil Kothari Emerging Artist Award 2025.",
+          "venues": [],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "music-video",
+          "title": "Music Video",
+          "status": "",
+          "year": "",
+          "role": "Performer",
+          "duration_min": null,
+          "media": {
+            "type": "youtube",
+            "src": "FwmH0qNqr0k",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": true
+        }
+      ]
+    },
+    {
+      "id": "commercial",
+      "title": "Brand Shoots & Shows",
+      "note": "Movement direction and performance for brands and runway.",
+      "items": [
+        {
+          "slug": "daily-objects",
+          "title": "Daily Objects",
+          "status": "",
+          "year": "",
+          "role": "Performer",
+          "duration_min": null,
+          "media": {
+            "type": "youtube",
+            "src": "shfNGOcC37A",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "eka",
+          "title": "EKA",
+          "status": "",
+          "year": "",
+          "role": "Performer",
+          "duration_min": null,
+          "media": {
+            "type": "youtube",
+            "src": "m7OLAy4HkMo",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "vianaar-homes-show",
+          "title": "Vianaar Homes Show",
+          "status": "",
+          "year": "",
+          "role": "Performer",
+          "duration_min": null,
+          "media": {
+            "type": "youtube",
+            "src": "xubYF69eSUo",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "cord-show",
+          "title": "CORD Show",
+          "status": "",
+          "year": "",
+          "role": "Performer",
+          "duration_min": null,
+          "media": {
+            "type": "youtube",
+            "src": "6NW_jKoXL5s",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": true
+        }
+      ]
+    }
+  ],
+  "stills": [
+    {
+      "src": "assets/img/still-01.jpg",
+      "alt": "Pallavi Verma in performance"
+    },
+    {
+      "src": "assets/img/still-02.jpg",
+      "alt": "Pallavi Verma in performance"
+    },
+    {
+      "src": "assets/img/still-03.jpg",
+      "alt": "Pallavi Verma in performance"
+    },
+    {
+      "src": "assets/img/still-04.jpg",
+      "alt": "Pallavi Verma in performance"
+    }
+  ],
+  "contact": {
+    "email": "pallavi05.verma@gmail.com",
+    "phone": "+91 70421 69150",
+    "instagram_handle": "@pallavi_verma__",
+    "instagram_url": "https://www.instagram.com/pallavi_verma__/",
+    "location": "New Delhi, India"
+  }
+}

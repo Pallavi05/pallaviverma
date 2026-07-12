@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Editor — Pallavi Verma</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ground:#2b2b2b;--well:#232323;--field:#1c1c1c;--line:#454545;--text:#edf0f2;--muted:#a8a8a8;--accent:#96aaff;--warn:#ffb27a;
+        --body:"Libre Franklin",Helvetica,Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--text);font-family:var(--body);line-height:1.5}
+  header{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+         padding:.9rem 1.5rem;background:rgba(43,43,43,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  h1{font-size:1rem;margin:0;letter-spacing:-.02em}
+  .grow{margin-left:auto}
+  main{max-width:60rem;margin:0 auto;padding:2rem 1.5rem 6rem}
+  h2{font-size:1.35rem;letter-spacing:-.02em;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
+  label{display:block;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .35rem}
+  input,textarea,select{width:100%;background:var(--field);color:var(--text);border:1px solid var(--line);border-radius:3px;
+        padding:.55rem .7rem;font:inherit;font-size:.9rem}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+  textarea{min-height:5.5rem;resize:vertical}
+  .field{margin-bottom:1rem}
+  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:1rem}
+  button{background:var(--field);color:var(--text);border:1px solid var(--line);border-radius:3px;
+         padding:.5rem .9rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  button:hover{border-color:var(--accent);color:var(--accent)}
+  button.primary{background:var(--accent);color:#14161c;border-color:var(--accent);font-weight:600}
+  button.primary:hover{opacity:.88;color:#14161c}
+  button.danger:hover{border-color:#ff8080;color:#ff8080}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  details.item{background:var(--well);border:1px solid var(--line);border-radius:4px;margin-bottom:.6rem}
+  details.item>summary{cursor:pointer;padding:.75rem 1rem;display:flex;align-items:center;gap:.75rem;list-style:none;font-weight:600}
+  details.item>summary::-webkit-details-marker{display:none}
+  details.item>summary::before{content:"▸";color:var(--muted);font-size:.8rem}
+  details.item[open]>summary::before{content:"▾"}
+  .item__body{padding:0 1rem 1rem}
+  .chip{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+        border:1px solid var(--line);border-radius:2px;padding:.1rem .35rem}
+  .chip.draft{color:var(--warn);border-color:var(--warn)}
+  .itemctl{margin-left:auto;display:flex;gap:.35rem}
+  .hint{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  .status{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em}
+  .status.err{color:#ff8080}.status.ok{color:var(--accent)}
+  .gate{max-width:32rem;margin:5rem auto;padding:0 1.5rem}
+  .gate p{color:var(--muted);font-size:.9rem}
+  code{font-family:var(--mono);font-size:.85em;background:var(--field);padding:.1rem .3rem;border-radius:2px}
+  .thumb{width:100%;aspect-ratio:16/10;object-fit:cover;background:var(--field);border:1px solid var(--line);border-radius:3px;margin-top:.5rem}
+  .hide{display:none}
+</style>
+</head>
+<body>
+
+<!-- ============ sign in ============ -->
+<div class="gate" id="gate">
+  <h1 style="font-size:1.6rem;margin-bottom:.5rem">Editor</h1>
+  <p>Paste a GitHub token to load the site content. It stays in this browser and is never sent anywhere except GitHub.</p>
+  <div class="field">
+    <label for="repo">Repository</label>
+    <input id="repo" placeholder="username/repository" autocomplete="off">
+  </div>
+  <div class="field">
+    <label for="token">GitHub token</label>
+    <input id="token" type="password" placeholder="github_pat_…" autocomplete="off">
+    <p class="hint">Fine-grained token, this repository only, with <code>Contents: Read and write</code>.</p>
+  </div>
+  <button class="primary" id="signin">Load content</button>
+  <p class="status err" id="gateStatus"></p>
+</div>
+
+<!-- ============ editor ============ -->
+<div id="app" class="hide">
+<header>
+  <h1>Editor</h1>
+  <span class="status" id="status"></span>
+  <div class="grow"></div>
+  <button id="preview">Open site</button>
+  <button id="signout">Sign out</button>
+  <button class="primary" id="publish">Publish changes</button>
+</header>
+
+<main>
+  <h2>Header</h2>
+  <div class="row">
+    <div class="field"><label for="f_name">Name</label><input id="f_name"></div>
+    <div class="field"><label for="f_role">Role line</label><input id="f_role"></div>
+  </div>
+  <div class="field"><label for="f_desc">Search-engine description</label><textarea id="f_desc" style="min-height:3.5rem"></textarea></div>
+  <div class="field"><label for="f_herocap">Hero caption</label><input id="f_herocap"></div>
+
+  <h2>About</h2>
+  <div class="field">
+    <label for="f_about">Biography — one paragraph per blank line</label>
+    <textarea id="f_about" style="min-height:12rem"></textarea>
+  </div>
+
+  <h2>Education</h2>
+  <div id="eduList"></div>
+  <button id="addEdu">Add entry</button>
+
+  <h2>Work</h2>
+  <p class="hint" style="margin-bottom:1rem">Each entry becomes a card on the homepage and, if it has a description, its own page.</p>
+  <div id="sectionList"></div>
+
+  <h2>Contact</h2>
+  <div class="row">
+    <div class="field"><label for="f_email">Email</label><input id="f_email"></div>
+    <div class="field"><label for="f_phone">Phone</label><input id="f_phone"></div>
+    <div class="field"><label for="f_ig">Instagram handle</label><input id="f_ig"></div>
+    <div class="field"><label for="f_igurl">Instagram link</label><input id="f_igurl"></div>
+    <div class="field"><label for="f_loc">Based in</label><input id="f_loc"></div>
+  </div>
+
+  <h2>Images</h2>
+  <div class="field">
+    <label for="f_upload">Upload an image to <code>assets/img/</code></label>
+    <input id="f_upload" type="file" accept="image/*">
+    <p class="hint" id="uploadHint">Once uploaded, use the path shown here in any Media field.</p>
+  </div>
+</main>
+</div>
+
+<script>
+const API = "https://api.github.com";
+let repo = localStorage.getItem("pv_repo") || "";
+let token = localStorage.getItem("pv_token") || "";
+let site = null, sha = null;
+
+const $ = (id) => document.getElementById(id);
+const esc = (s="") => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const slugify = (s) => String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+
+function say(msg, kind="") {
+  const el = $("status");
+  el.textContent = msg; el.className = "status " + kind;
+  if (kind === "ok") setTimeout(() => { if (el.textContent === msg) el.textContent = ""; }, 4000);
+}
+
+/* ---------- GitHub ---------- */
+
+async function gh(path, opts = {}) {
+  const res = await fetch(`${API}/repos/${repo}/contents/${path}`, {
+    ...opts,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+      ...(opts.headers || {}),
+    },
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.message || `GitHub returned ${res.status}`);
+  }
+  return res.json();
+}
+
+// UTF-8 safe base64 both ways
+const toB64 = (str) => btoa(String.fromCharCode(...new TextEncoder().encode(str)));
+const fromB64 = (b64) => new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g,"")), c => c.charCodeAt(0)));
+
+async function load() {
+  const file = await gh("content/site.json");
+  sha = file.sha;
+  site = JSON.parse(fromB64(file.content));
+}
+
+async function save() {
+  const res = await gh("content/site.json", {
+    method: "PUT",
+    body: JSON.stringify({
+      message: "Update site content via editor",
+      content: toB64(JSON.stringify(site, null, 2) + "\n"),
+      sha,
+    }),
+  });
+  sha = res.content.sha;
+}
+
+/* ---------- render ---------- */
+
+function renderEdu() {
+  $("eduList").innerHTML = site.education.map((e, i) => `
+    <details class="item">
+      <summary>${esc(e.qualification) || "Untitled"} <span class="chip">${esc(e.years)}</span>
+        <span class="itemctl"><button class="danger" data-edudel="${i}">Remove</button></span>
+      </summary>
+      <div class="item__body">
+        <div class="field"><label>Qualification</label><input data-edu="${i}" data-k="qualification" value="${esc(e.qualification)}"></div>
+        <div class="row">
+          <div class="field"><label>Years</label><input data-edu="${i}" data-k="years" value="${esc(e.years)}"></div>
+          <div class="field"><label>Institution</label><input data-edu="${i}" data-k="institution" value="${esc(e.institution)}"></div>
+        </div>
+      </div>
+    </details>`).join("");
+}
+
+function itemForm(si, ii, it) {
+  const m = it.media || { type: "image", src: "", poster: "" };
+  const opt = (v, label) => `<option value="${v}" ${m.type === v ? "selected" : ""}>${label}</option>`;
+  return `
+  <details class="item">
+    <summary>${esc(it.title) || "Untitled"}
+      ${it.year ? `<span class="chip">${esc(it.year)}</span>` : ""}
+      ${it.published === false ? `<span class="chip draft">Draft</span>` : ""}
+      <span class="itemctl">
+        <button data-move="${si}:${ii}:-1">↑</button>
+        <button data-move="${si}:${ii}:1">↓</button>
+        <button class="danger" data-del="${si}:${ii}">Remove</button>
+      </span>
+    </summary>
+    <div class="item__body">
+      <div class="row">
+        <div class="field"><label>Title</label><input data-i="${si}:${ii}" data-k="title" value="${esc(it.title)}"></div>
+        <div class="field"><label>Year</label><input data-i="${si}:${ii}" data-k="year" value="${esc(it.year)}"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Role</label><input data-i="${si}:${ii}" data-k="role" value="${esc(it.role)}"></div>
+        <div class="field"><label>Status badge (optional)</label><input data-i="${si}:${ii}" data-k="status" value="${esc(it.status)}" placeholder="Work in progress"></div>
+        <div class="field"><label>Running time (minutes)</label><input data-i="${si}:${ii}" data-k="duration_min" type="number" min="0" value="${it.duration_min ?? ""}"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Media type</label>
+          <select data-media="${si}:${ii}" data-k="type">
+            ${opt("image","Image")}${opt("video","Video file")}${opt("youtube","YouTube")}
+          </select>
+        </div>
+        <div class="field"><label>Media source</label>
+          <input data-media="${si}:${ii}" data-k="src" value="${esc(m.src)}" placeholder="assets/img/name.jpg or YouTube ID">
+        </div>
+        <div class="field"><label>Poster image (video only)</label>
+          <input data-media="${si}:${ii}" data-k="poster" value="${esc(m.poster)}" placeholder="assets/img/name.jpg">
+        </div>
+      </div>
+      <div class="field"><label>Description</label><textarea data-i="${si}:${ii}" data-k="description">${esc(it.description)}</textarea></div>
+      <div class="row">
+        <div class="field"><label>Performed at — one per line</label><textarea data-list="${si}:${ii}" data-k="venues">${esc((it.venues||[]).join("\n"))}</textarea></div>
+        <div class="field"><label>Credits — one per line</label><textarea data-list="${si}:${ii}" data-k="credits">${esc((it.credits||[]).join("\n"))}</textarea></div>
+      </div>
+      <div class="field">
+        <label>URL slug</label><input data-i="${si}:${ii}" data-k="slug" value="${esc(it.slug)}">
+        <p class="hint">Page address: <code>/work/${esc(it.slug)}/</code></p>
+      </div>
+      <label style="display:flex;gap:.5rem;align-items:center;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:.9rem;color:var(--text)">
+        <input type="checkbox" data-pub="${si}:${ii}" ${it.published !== false ? "checked" : ""} style="width:auto">
+        Show on the site
+      </label>
+    </div>
+  </details>`;
+}
+
+function renderSections() {
+  $("sectionList").innerHTML = site.sections.map((s, si) => `
+    <h3 style="font-size:1rem;margin:1.75rem 0 .75rem;letter-spacing:-.01em">${esc(s.title)}</h3>
+    ${s.items.map((it, ii) => itemForm(si, ii, it)).join("")}
+    <button data-add="${si}">Add to ${esc(s.title)}</button>
+  `).join("");
+}
+
+function render() {
+  $("f_name").value    = site.meta.name;
+  $("f_role").value    = site.meta.role;
+  $("f_desc").value    = site.meta.description;
+  $("f_herocap").value = site.hero.caption || "";
+  $("f_about").value   = site.about.body.join("\n\n");
+  $("f_email").value   = site.contact.email;
+  $("f_phone").value   = site.contact.phone;
+  $("f_ig").value      = site.contact.instagram_handle;
+  $("f_igurl").value   = site.contact.instagram_url;
+  $("f_loc").value     = site.contact.location;
+  renderEdu();
+  renderSections();
+}
+
+/* ---------- collect ---------- */
+
+function collect() {
+  site.meta.name = $("f_name").value.trim();
+  site.meta.role = $("f_role").value.trim();
+  site.meta.description = $("f_desc").value.trim();
+  site.hero.caption = $("f_herocap").value.trim();
+  site.about.body = $("f_about").value.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+  site.contact.email = $("f_email").value.trim();
+  site.contact.phone = $("f_phone").value.trim();
+  site.contact.instagram_handle = $("f_ig").value.trim();
+  site.contact.instagram_url = $("f_igurl").value.trim();
+  site.contact.location = $("f_loc").value.trim();
+}
+
+/* live-bind every field back into the model */
+document.addEventListener("input", (e) => {
+  const t = e.target;
+  const set = (attr, fn) => {
+    if (!t.dataset[attr]) return false;
+    const [si, ii] = t.dataset[attr].split(":").map(Number);
+    fn(site.sections[si].items[ii]);
+    return true;
+  };
+  if (t.dataset.edu !== undefined) {
+    site.education[Number(t.dataset.edu)][t.dataset.k] = t.value;
+  } else if (set("i", (it) => {
+    const k = t.dataset.k;
+    it[k] = k === "duration_min" ? (t.value === "" ? null : Number(t.value)) : t.value;
+  })) {} else if (set("media", (it) => { it.media = it.media || {}; it.media[t.dataset.k] = t.value; })) {}
+  else if (set("list", (it) => { it[t.dataset.k] = t.value.split("\n").map(s => s.trim()).filter(Boolean); })) {}
+  else if (set("pub", (it) => { it.published = t.checked; })) {}
+});
+
+/* ---------- buttons ---------- */
+
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("button");
+  if (!b) return;
+
+  if (b.dataset.add !== undefined) {
+    const si = Number(b.dataset.add);
+    site.sections[si].items.push({
+      slug: "new-work-" + Date.now().toString(36),
+      title: "New work", status: "", year: String(new Date().getFullYear()),
+      role: "", duration_min: null,
+      media: { type: "image", src: "", poster: "" },
+      description: "", venues: [], credits: [], published: false,
+    });
+    renderSections();
+  }
+
+  if (b.dataset.del) {
+    const [si, ii] = b.dataset.del.split(":").map(Number);
+    if (confirm(`Remove “${site.sections[si].items[ii].title}”? This is not undone until you publish.`)) {
+      site.sections[si].items.splice(ii, 1);
+      renderSections();
+    }
+  }
+
+  if (b.dataset.move) {
+    const [si, ii, dir] = b.dataset.move.split(":").map(Number);
+    const list = site.sections[si].items;
+    const j = ii + dir;
+    if (j < 0 || j >= list.length) return;
+    [list[ii], list[j]] = [list[j], list[ii]];
+    renderSections();
+  }
+
+  if (b.dataset.edudel) {
+    site.education.splice(Number(b.dataset.edudel), 1);
+    renderEdu();
+  }
+});
+
+$("addEdu").onclick = () => {
+  site.education.push({ qualification: "", years: "", institution: "" });
+  renderEdu();
+};
+
+/* auto-slug from title when the slug still looks auto-generated */
+document.addEventListener("change", (e) => {
+  const t = e.target;
+  if (t.dataset.i && t.dataset.k === "title") {
+    const [si, ii] = t.dataset.i.split(":").map(Number);
+    const it = site.sections[si].items[ii];
+    if (/^new-work-/.test(it.slug)) { it.slug = slugify(it.title); renderSections(); }
+  }
+});
+
+/* ---------- image upload ---------- */
+
+$("f_upload").onchange = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const name = slugify(file.name.replace(/\.[^.]+$/, "")) + "." + file.name.split(".").pop().toLowerCase();
+  const path = `assets/img/${name}`;
+  say("Uploading " + name + "…");
+  try {
+    const b64 = await new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(r.result.split(",")[1]);
+      r.onerror = rej;
+      r.readAsDataURL(file);
+    });
+    let existing = null;
+    try { existing = (await gh(path)).sha; } catch { /* new file */ }
+    await gh(path, {
+      method: "PUT",
+      body: JSON.stringify({
+        message: `Add image ${name}`,
+        content: b64,
+        ...(existing ? { sha: existing } : {}),
+      }),
+    });
+    $("uploadHint").innerHTML = `Uploaded. Paste this into a Media field: <code>${esc(path)}</code>`;
+    say("Image uploaded", "ok");
+  } catch (err) {
+    say(err.message, "err");
+  }
+  e.target.value = "";
+};
+
+/* ---------- publish ---------- */
+
+$("publish").onclick = async () => {
+  collect();
+  $("publish").disabled = true;
+  say("Publishing…");
+  try {
+    await save();
+    say("Published. The site rebuilds in about a minute.", "ok");
+  } catch (err) {
+    say(err.message.includes("does not match") ? "Someone else changed the content. Reload and redo your edits." : err.message, "err");
+  }
+  $("publish").disabled = false;
+};
+
+$("preview").onclick = () => {
+  const [owner, name] = repo.split("/");
+  window.open(`https://${owner}.github.io/${name === owner + ".github.io" ? "" : name + "/"}`, "_blank");
+};
+
+$("signout").onclick = () => {
+  localStorage.removeItem("pv_token");
+  location.reload();
+};
+
+/* ---------- boot ---------- */
+
+async function boot() {
+  $("gateStatus").textContent = "";
+  try {
+    await load();
+    $("gate").classList.add("hide");
+    $("app").classList.remove("hide");
+    render();
+  } catch (err) {
+    $("gateStatus").textContent = err.message;
+    localStorage.removeItem("pv_token");
+  }
+}
+
+$("signin").onclick = async () => {
+  repo = $("repo").value.trim().replace(/^https?:\/\/github\.com\//, "").replace(/\/$/, "");
+  token = $("token").value.trim();
+  if (!repo.includes("/") || !token) {
+    $("gateStatus").textContent = "Enter both the repository and a token.";
+    return;
+  }
+  localStorage.setItem("pv_repo", repo);
+  localStorage.setItem("pv_token", token);
+  boot();
+};
+
+if (repo && token) { $("repo").value = repo; boot(); }
+else if (repo) { $("repo").value = repo; }
+</script>
+</body>
+</html>
