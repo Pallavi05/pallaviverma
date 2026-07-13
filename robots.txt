@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
 Sitemap: https://pallavi05.github.io/pallaviverma/sitemap.xml

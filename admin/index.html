@@ -4,139 +4,234 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Editor — Pallavi Verma</title>
+<title>Site Editor — Pallavi Verma</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{--ground:#2b2b2b;--well:#232323;--field:#1c1c1c;--line:#454545;--text:#edf0f2;--muted:#a8a8a8;--accent:#96aaff;--warn:#ffb27a;
         --body:"Libre Franklin",Helvetica,Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
   *,*::before,*::after{box-sizing:border-box}
-  body{margin:0;background:var(--ground);color:var(--text);font-family:var(--body);line-height:1.5}
-  header{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
-         padding:.9rem 1.5rem;background:rgba(43,43,43,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  h1{font-size:1rem;margin:0;letter-spacing:-.02em}
+  body{margin:0;background:var(--ground);color:var(--text);font-family:var(--body);line-height:1.55}
+  header.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;
+         padding:.9rem 1.5rem;background:rgba(43,43,43,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  h1{font-size:1.05rem;margin:0;letter-spacing:-.02em}
   .grow{margin-left:auto}
-  main{max-width:60rem;margin:0 auto;padding:2rem 1.5rem 6rem}
-  h2{font-size:1.35rem;letter-spacing:-.02em;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
-  label{display:block;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .35rem}
-  input,textarea,select{width:100%;background:var(--field);color:var(--text);border:1px solid var(--line);border-radius:3px;
-        padding:.55rem .7rem;font:inherit;font-size:.9rem}
+  main{max-width:62rem;margin:0 auto;padding:2rem 1.5rem 8rem}
+  h2{font-size:1.5rem;letter-spacing:-.02em;margin:3rem 0 .35rem}
+  .sectionlead{color:var(--muted);font-size:.9rem;margin:0 0 1.25rem}
+  label{display:block;font-size:.85rem;font-weight:600;color:var(--text);margin:0 0 .3rem}
+  input,textarea,select{width:100%;background:var(--field);color:var(--text);border:1px solid var(--line);border-radius:4px;
+        padding:.6rem .7rem;font:inherit;font-size:1rem}
   input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
   textarea{min-height:5.5rem;resize:vertical}
-  .field{margin-bottom:1rem}
-  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:1rem}
-  button{background:var(--field);color:var(--text);border:1px solid var(--line);border-radius:3px;
-         padding:.5rem .9rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .field{margin-bottom:1.1rem}
+  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1rem}
+  button{background:var(--field);color:var(--text);border:1px solid var(--line);border-radius:4px;
+         padding:.55rem 1rem;font:inherit;font-size:.85rem;cursor:pointer}
   button:hover{border-color:var(--accent);color:var(--accent)}
   button.primary{background:var(--accent);color:#14161c;border-color:var(--accent);font-weight:600}
   button.primary:hover{opacity:.88;color:#14161c}
   button.danger:hover{border-color:#ff8080;color:#ff8080}
+  button.small{padding:.3rem .6rem;font-size:.78rem}
   button:disabled{opacity:.4;cursor:not-allowed}
-  details.item{background:var(--well);border:1px solid var(--line);border-radius:4px;margin-bottom:.6rem}
-  details.item>summary{cursor:pointer;padding:.75rem 1rem;display:flex;align-items:center;gap:.75rem;list-style:none;font-weight:600}
+  details.item{background:var(--well);border:1px solid var(--line);border-radius:5px;margin-bottom:.6rem}
+  details.item>summary{cursor:pointer;padding:.8rem 1rem;display:flex;align-items:center;gap:.75rem;list-style:none;font-weight:600;flex-wrap:wrap}
   details.item>summary::-webkit-details-marker{display:none}
   details.item>summary::before{content:"▸";color:var(--muted);font-size:.8rem}
   details.item[open]>summary::before{content:"▾"}
-  .item__body{padding:0 1rem 1rem}
-  .chip{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
-        border:1px solid var(--line);border-radius:2px;padding:.1rem .35rem}
+  .item__body{padding:.25rem 1rem 1.1rem}
+  .chip{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+        border:1px solid var(--line);border-radius:3px;padding:.12rem .4rem;white-space:nowrap}
   .chip.draft{color:var(--warn);border-color:var(--warn)}
+  .chip.unsaved{color:var(--warn);border-color:var(--warn)}
   .itemctl{margin-left:auto;display:flex;gap:.35rem}
   .hint{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
-  .status{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em}
-  .status.err{color:#ff8080}.status.ok{color:var(--accent)}
-  .gate{max-width:32rem;margin:5rem auto;padding:0 1.5rem}
-  .gate p{color:var(--muted);font-size:.9rem}
+  .status{font-family:var(--mono);font-size:.75rem;letter-spacing:.04em}
+  .status.err{color:#ff8080}.status.ok{color:#9fe8b1}
+  .gate{max-width:34rem;margin:4rem auto;padding:0 1.5rem}
+  .gate p{color:var(--muted);font-size:.95rem}
   code{font-family:var(--mono);font-size:.85em;background:var(--field);padding:.1rem .3rem;border-radius:2px}
-  .thumb{width:100%;aspect-ratio:16/10;object-fit:cover;background:var(--field);border:1px solid var(--line);border-radius:3px;margin-top:.5rem}
+  .thumb{max-width:14rem;aspect-ratio:16/10;object-fit:cover;background:var(--field);border:1px solid var(--line);border-radius:4px;margin:.25rem 0 .75rem;display:block}
   .hide{display:none}
+  .check{display:flex;gap:.55rem;align-items:flex-start;font-size:.92rem;font-weight:400;color:var(--text)}
+  .check input{width:auto;margin-top:.25rem}
+  .seccard{border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.1rem .9rem;margin:0 0 1.5rem;background:rgba(0,0,0,.12)}
+  .seccard__head{display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem}
+  .seccard__head .field{margin-bottom:0;flex:1 1 12rem}
+  .seccard__ctl{display:flex;gap:.35rem;padding-bottom:.15rem}
+  .addsec{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;border:1px dashed var(--line);border-radius:6px;padding:1rem}
+  .addsec input{flex:1 1 14rem;width:auto}
+  .stillgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));gap:1rem}
+  .stillcard{background:var(--well);border:1px solid var(--line);border-radius:5px;padding:.6rem}
+  .stillcard img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:3px;background:var(--field)}
+  .stillcard .ctl{display:flex;gap:.3rem;margin-top:.5rem}
+  .stillcard input{font-size:.85rem;margin-top:.5rem}
+  .filegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(9rem,1fr));gap:.8rem}
+  .filegrid figure{margin:0;background:var(--well);border:1px solid var(--line);border-radius:5px;padding:.4rem}
+  .filegrid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:3px;background:var(--field)}
+  .filegrid figcaption{font-family:var(--mono);font-size:.62rem;color:var(--muted);padding:.35rem .1rem 0;word-break:break-all}
+  nav.toc{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.5rem 0 0}
+  nav.toc a{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+        text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.3rem .8rem}
+  nav.toc a:hover{color:var(--accent);border-color:var(--accent)}
+  details.help{border:1px solid var(--line);border-radius:6px;margin-top:1.5rem;background:var(--well)}
+  details.help summary{cursor:pointer;padding:.8rem 1rem;font-weight:600}
+  details.help .inner{padding:0 1rem 1rem;color:var(--muted);font-size:.92rem}
+  details.help .inner b{color:var(--text)}
 </style>
 </head>
 <body>
 
 <!-- ============ sign in ============ -->
 <div class="gate" id="gate">
-  <h1 style="font-size:1.6rem;margin-bottom:.5rem">Editor</h1>
-  <p>Paste a GitHub token to load the site content. It stays in this browser and is never sent anywhere except GitHub.</p>
+  <h1 style="font-size:1.7rem;margin-bottom:.5rem">Site editor</h1>
+  <p>Welcome! Paste your <b>access key</b> below to open the editor. The key stays in this browser only — it is never sent anywhere except to GitHub, where the site lives.</p>
   <div class="field">
-    <label for="repo">Repository</label>
-    <input id="repo" placeholder="username/repository" autocomplete="off">
-  </div>
-  <div class="field">
-    <label for="token">GitHub token</label>
+    <label for="token">Access key</label>
     <input id="token" type="password" placeholder="github_pat_…" autocomplete="off">
-    <p class="hint">Fine-grained token, this repository only, with <code>Contents: Read and write</code>.</p>
+    <p class="hint">The long code that starts with <code>github_pat_</code>. Lost it? A new one can be made at github.com → Settings → Developer settings → Fine-grained tokens (this repository only, Contents: Read and write).</p>
   </div>
-  <button class="primary" id="signin">Load content</button>
+  <div class="field">
+    <label class="check"><input type="checkbox" id="remember" checked>
+      <span>Remember me on this computer<br><span class="hint" style="margin:0">Untick this on a shared or public computer — then the key is forgotten when you close the browser.</span></span>
+    </label>
+  </div>
+  <details style="margin-bottom:1rem"><summary class="hint" style="cursor:pointer">Advanced</summary>
+    <div class="field" style="margin-top:.75rem">
+      <label for="repo">Repository</label>
+      <input id="repo" placeholder="username/repository" autocomplete="off">
+    </div>
+  </details>
+  <button class="primary" id="signin">Open the editor</button>
   <p class="status err" id="gateStatus"></p>
 </div>
 
 <!-- ============ editor ============ -->
 <div id="app" class="hide">
-<header>
-  <h1>Editor</h1>
+<header class="bar">
+  <h1>Site editor</h1>
+  <span class="chip unsaved hide" id="dirtyChip">Unpublished changes</span>
   <span class="status" id="status"></span>
   <div class="grow"></div>
-  <button id="preview">Open site</button>
+  <button id="preview">View site</button>
   <button id="signout">Sign out</button>
   <button class="primary" id="publish">Publish changes</button>
 </header>
 
 <main>
-  <h2>Header</h2>
+  <details class="help">
+    <summary>First time here? How this works</summary>
+    <div class="inner">
+      <p><b>1.</b> Change anything below — text, photos, videos, whole sections.</p>
+      <p><b>2.</b> Nothing is live yet: take your time, nothing is saved until you decide.</p>
+      <p><b>3.</b> Press <b>Publish changes</b> (top right). The site updates itself in a minute or two.</p>
+      <p>Tip: after publishing, press <b>View site</b> and refresh the page to see your changes.</p>
+    </div>
+  </details>
+
+  <nav class="toc">
+    <a href="#s-basics">Basics</a><a href="#s-hero">Opening video</a><a href="#s-about">About</a>
+    <a href="#s-edu">Education</a><a href="#s-work">Work</a><a href="#s-stills">Photo gallery</a>
+    <a href="#s-contact">Contact</a><a href="#s-files">Photos &amp; videos</a>
+  </nav>
+
+  <h2 id="s-basics">Basics</h2>
+  <p class="sectionlead">Your name and the one-line description under it.</p>
   <div class="row">
     <div class="field"><label for="f_name">Name</label><input id="f_name"></div>
     <div class="field"><label for="f_role">Role line</label><input id="f_role"></div>
   </div>
-  <div class="field"><label for="f_desc">Search-engine description</label><textarea id="f_desc" style="min-height:3.5rem"></textarea></div>
-  <div class="field"><label for="f_herocap">Hero caption</label><input id="f_herocap"></div>
-
-  <h2>About</h2>
   <div class="field">
-    <label for="f_about">Biography — one paragraph per blank line</label>
-    <textarea id="f_about" style="min-height:12rem"></textarea>
+    <label for="f_desc">Description for Google</label>
+    <textarea id="f_desc" style="min-height:3.5rem"></textarea>
+    <p class="hint">This text shows up in search results. One or two sentences about who you are.</p>
   </div>
 
-  <h2>Education</h2>
+  <h2 id="s-hero">Opening video</h2>
+  <p class="sectionlead">The full-screen video visitors see first.</p>
+  <div class="row">
+    <div class="field"><label>Video</label><span id="heroVideo"></span></div>
+    <div class="field"><label>Cover photo (shows while the video loads)</label><span id="heroPoster"></span></div>
+    <div class="field"><label for="f_herocap">Small caption (bottom right)</label><input id="f_herocap"></div>
+  </div>
+
+  <h2 id="s-about">About</h2>
+  <div class="field"><label>Portrait photo</label><span id="aboutPortrait"></span></div>
+  <div class="field">
+    <label for="f_about">Your story</label>
+    <textarea id="f_about" style="min-height:12rem"></textarea>
+    <p class="hint">Leave an empty line between paragraphs.</p>
+  </div>
+
+  <h2 id="s-edu">Education</h2>
   <div id="eduList"></div>
-  <button id="addEdu">Add entry</button>
+  <button id="addEdu">+ Add an entry</button>
 
-  <h2>Work</h2>
-  <p class="hint" style="margin-bottom:1rem">Each entry becomes a card on the homepage and, if it has a description, its own page.</p>
+  <h2 id="s-work">Work</h2>
+  <p class="sectionlead">Your work lives in sections (Performance, Film, …). You can rename them, reorder them, delete them, or create brand-new ones — for example “Teaching” or “Press”.</p>
   <div id="sectionList"></div>
+  <div class="addsec">
+    <label for="newSecTitle" style="margin:0">New section:</label>
+    <input id="newSecTitle" placeholder="e.g. Teaching, Workshops, Press…">
+    <button id="addSec">+ Create section</button>
+  </div>
 
-  <h2>Contact</h2>
+  <h2 id="s-stills">Photo gallery</h2>
+  <p class="sectionlead">The photos at the bottom of the site. Visitors can click them to view full screen.</p>
+  <div class="stillgrid" id="stillList"></div>
+  <p style="margin-top:1rem"><button id="addStill">+ Add a photo</button></p>
+
+  <h2 id="s-contact">Contact</h2>
   <div class="row">
     <div class="field"><label for="f_email">Email</label><input id="f_email"></div>
     <div class="field"><label for="f_phone">Phone</label><input id="f_phone"></div>
-    <div class="field"><label for="f_ig">Instagram handle</label><input id="f_ig"></div>
+    <div class="field"><label for="f_ig">Instagram name</label><input id="f_ig"></div>
     <div class="field"><label for="f_igurl">Instagram link</label><input id="f_igurl"></div>
     <div class="field"><label for="f_loc">Based in</label><input id="f_loc"></div>
   </div>
 
-  <h2>Images</h2>
-  <div class="field">
-    <label for="f_upload">Upload an image to <code>assets/img/</code></label>
-    <input id="f_upload" type="file" accept="image/*">
-    <p class="hint" id="uploadHint">Once uploaded, use the path shown here in any Media field.</p>
-  </div>
+  <h2 id="s-files">Photos &amp; videos</h2>
+  <p class="sectionlead">Everything uploaded so far. Upload here first, then pick the file from any dropdown above.</p>
+  <p style="margin:0 0 1rem"><button id="uploadBtn">⬆ Upload photos or videos</button> <span class="hint" style="display:inline">JPG or PNG photos, MP4 videos (up to 20&nbsp;MB).</span></p>
+  <div class="filegrid" id="fileGrid"></div>
 </main>
 </div>
 
+<input type="file" id="uploader" class="hide" accept="image/*,video/mp4,video/webm" multiple>
+
 <script>
 const API = "https://api.github.com";
-let repo = localStorage.getItem("pv_repo") || "";
-let token = localStorage.getItem("pv_token") || "";
+const DEFAULT_REPO = "Pallavi05/pallaviverma";
+
+let repo = localStorage.getItem("pv_repo") || DEFAULT_REPO;
+let token = localStorage.getItem("pv_token") || sessionStorage.getItem("pv_token") || "";
 let site = null, sha = null;
+let images = [], videos = [];
+let dirty = false;
+let pendingBind = null; // where an uploaded file should land
 
 const $ = (id) => document.getElementById(id);
-const esc = (s="") => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const esc = (s = "") => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 const slugify = (s) => String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const raw = (path) => `https://raw.githubusercontent.com/${repo}/main/${path}`;
 
-function say(msg, kind="") {
+function say(msg, kind = "") {
   const el = $("status");
   el.textContent = msg; el.className = "status " + kind;
-  if (kind === "ok") setTimeout(() => { if (el.textContent === msg) el.textContent = ""; }, 4000);
+  if (kind === "ok") setTimeout(() => { if (el.textContent === msg) el.textContent = ""; }, 6000);
 }
+
+function markDirty() {
+  if (dirty) return;
+  dirty = true;
+  $("dirtyChip").classList.remove("hide");
+}
+function clearDirty() {
+  dirty = false;
+  $("dirtyChip").classList.add("hide");
+}
+window.addEventListener("beforeunload", (e) => {
+  if (dirty) { e.preventDefault(); e.returnValue = ""; }
+});
 
 /* ---------- GitHub ---------- */
 
@@ -157,14 +252,24 @@ async function gh(path, opts = {}) {
   return res.json();
 }
 
-// UTF-8 safe base64 both ways
 const toB64 = (str) => btoa(String.fromCharCode(...new TextEncoder().encode(str)));
 const fromB64 = (b64) => new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g,"")), c => c.charCodeAt(0)));
+
+async function listDir(path) {
+  try {
+    const res = await gh(path);
+    return (Array.isArray(res) ? res : []).filter(f => f.type === "file").map(f => f.path).sort();
+  } catch { return []; }
+}
 
 async function load() {
   const file = await gh("content/site.json");
   sha = file.sha;
   site = JSON.parse(fromB64(file.content));
+  site.sections ||= [];
+  site.stills ||= [];
+  site.education ||= [];
+  [images, videos] = await Promise.all([listDir("assets/img"), listDir("assets/video")]);
 }
 
 async function save() {
@@ -179,102 +284,200 @@ async function save() {
   sha = res.content.sha;
 }
 
-/* ---------- render ---------- */
+/* ---------- reusable pieces ---------- */
+
+/* dropdown of uploaded files. bind = data-attributes that say where the value goes */
+function fileSelect(kind, bind, value) {
+  const list = kind === "video" ? videos : images;
+  const nice = (p) => p.split("/").pop();
+  const unknown = value && !list.includes(value)
+    ? `<option value="${esc(value)}" selected>${esc(nice(value))}</option>` : "";
+  return `<select ${bind} data-kind="${kind}" data-rerender>
+    <option value="">— choose ${kind === "video" ? "a video" : "a photo"} —</option>
+    ${unknown}
+    ${list.map(p => `<option value="${esc(p)}"${p === value ? " selected" : ""}>${esc(nice(p))}</option>`).join("")}
+    <option value="__upload__">⬆ Upload a new ${kind === "video" ? "video" : "photo"}…</option>
+  </select>`;
+}
+
+function ytId(v) {
+  v = String(v || "").trim();
+  const m = v.match(/(?:youtube\.com\/(?:watch\?.*v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
+  if (m) return m[1];
+  return v;
+}
+
+/* ---------- render: education ---------- */
 
 function renderEdu() {
   $("eduList").innerHTML = site.education.map((e, i) => `
     <details class="item">
-      <summary>${esc(e.qualification) || "Untitled"} <span class="chip">${esc(e.years)}</span>
-        <span class="itemctl"><button class="danger" data-edudel="${i}">Remove</button></span>
+      <summary>${esc(e.qualification) || "New entry"} <span class="chip">${esc(e.years || "")}</span>
+        <span class="itemctl"><button class="danger small" data-edudel="${i}">Remove</button></span>
       </summary>
       <div class="item__body">
-        <div class="field"><label>Qualification</label><input data-edu="${i}" data-k="qualification" value="${esc(e.qualification)}"></div>
+        <div class="field"><label>Degree or training</label><input data-edu="${i}" data-k="qualification" value="${esc(e.qualification || "")}"></div>
         <div class="row">
-          <div class="field"><label>Years</label><input data-edu="${i}" data-k="years" value="${esc(e.years)}"></div>
-          <div class="field"><label>Institution</label><input data-edu="${i}" data-k="institution" value="${esc(e.institution)}"></div>
+          <div class="field"><label>Years (e.g. 2018 – 2020)</label><input data-edu="${i}" data-k="years" value="${esc(e.years || "")}"></div>
+          <div class="field"><label>School / institution</label><input data-edu="${i}" data-k="institution" value="${esc(e.institution || "")}"></div>
         </div>
       </div>
     </details>`).join("");
 }
 
+/* ---------- render: work sections ---------- */
+
+function mediaFields(si, ii, it) {
+  const m = it.media || (it.media = { type: "image", src: "", poster: "" });
+  const key = `${si}:${ii}`;
+  let fields = "", thumb = "";
+
+  if (m.type === "youtube") {
+    fields = `<div class="field"><label>YouTube link</label>
+      <input data-media="${key}" data-k="src" value="${esc(m.src || "")}" placeholder="Paste the whole link, e.g. https://youtu.be/…">
+      <p class="hint">Paste the full link — it is converted automatically when you publish.</p></div>`;
+    const id = ytId(m.src);
+    if (/^[\w-]{11}$/.test(id)) thumb = `<img class="thumb" src="https://i.ytimg.com/vi/${esc(id)}/hqdefault.jpg" alt="">`;
+  } else if (m.type === "video") {
+    fields = `<div class="field"><label>Video file</label>${fileSelect("video", `data-media="${key}" data-k="src"`, m.src || "")}</div>
+      <div class="field"><label>Cover photo (shows before play)</label>${fileSelect("image", `data-media="${key}" data-k="poster"`, m.poster || "")}</div>`;
+    if (m.poster) thumb = `<img class="thumb" src="${raw(m.poster)}" alt="">`;
+  } else {
+    fields = `<div class="field"><label>Photo</label>${fileSelect("image", `data-media="${key}" data-k="src"`, m.src || "")}</div>`;
+    if (m.src) thumb = `<img class="thumb" src="${raw(m.src)}" alt="">`;
+  }
+
+  return `<div class="row">
+    <div class="field"><label>What kind of media?</label>
+      <select data-media="${key}" data-k="type" data-rerender>
+        <option value="image"${m.type === "image" ? " selected" : ""}>Photo</option>
+        <option value="video"${m.type === "video" ? " selected" : ""}>Video file</option>
+        <option value="youtube"${m.type === "youtube" ? " selected" : ""}>YouTube video</option>
+      </select>
+    </div>
+    ${fields}
+  </div>${thumb}`;
+}
+
 function itemForm(si, ii, it) {
-  const m = it.media || { type: "image", src: "", poster: "" };
-  const opt = (v, label) => `<option value="${v}" ${m.type === v ? "selected" : ""}>${label}</option>`;
+  const key = `${si}:${ii}`;
   return `
   <details class="item">
     <summary>${esc(it.title) || "Untitled"}
       ${it.year ? `<span class="chip">${esc(it.year)}</span>` : ""}
-      ${it.published === false ? `<span class="chip draft">Draft</span>` : ""}
+      ${it.published === false ? `<span class="chip draft">Hidden</span>` : ""}
       <span class="itemctl">
-        <button data-move="${si}:${ii}:-1">↑</button>
-        <button data-move="${si}:${ii}:1">↓</button>
-        <button class="danger" data-del="${si}:${ii}">Remove</button>
+        <button class="small" data-move="${key}:-1" title="Move up">↑</button>
+        <button class="small" data-move="${key}:1" title="Move down">↓</button>
+        <button class="danger small" data-del="${key}">Remove</button>
       </span>
     </summary>
     <div class="item__body">
       <div class="row">
-        <div class="field"><label>Title</label><input data-i="${si}:${ii}" data-k="title" value="${esc(it.title)}"></div>
-        <div class="field"><label>Year</label><input data-i="${si}:${ii}" data-k="year" value="${esc(it.year)}"></div>
+        <div class="field"><label>Title</label><input data-i="${key}" data-k="title" value="${esc(it.title || "")}"></div>
+        <div class="field"><label>Year</label><input data-i="${key}" data-k="year" value="${esc(it.year || "")}"></div>
       </div>
       <div class="row">
-        <div class="field"><label>Role</label><input data-i="${si}:${ii}" data-k="role" value="${esc(it.role)}"></div>
-        <div class="field"><label>Status badge (optional)</label><input data-i="${si}:${ii}" data-k="status" value="${esc(it.status)}" placeholder="Work in progress"></div>
-        <div class="field"><label>Running time (minutes)</label><input data-i="${si}:${ii}" data-k="duration_min" type="number" min="0" value="${it.duration_min ?? ""}"></div>
+        <div class="field"><label>Your role (e.g. Performer, Choreographer)</label><input data-i="${key}" data-k="role" value="${esc(it.role || "")}"></div>
+        <div class="field"><label>Badge (optional)</label><input data-i="${key}" data-k="status" value="${esc(it.status || "")}" placeholder="e.g. Work in progress"></div>
+        <div class="field"><label>Length in minutes (optional)</label><input data-i="${key}" data-k="duration_min" type="number" min="0" value="${it.duration_min ?? ""}"></div>
       </div>
+      ${mediaFields(si, ii, it)}
+      <div class="field"><label>Short description</label><textarea data-i="${key}" data-k="description">${esc(it.description || "")}</textarea></div>
       <div class="row">
-        <div class="field"><label>Media type</label>
-          <select data-media="${si}:${ii}" data-k="type">
-            ${opt("image","Image")}${opt("video","Video file")}${opt("youtube","YouTube")}
-          </select>
-        </div>
-        <div class="field"><label>Media source</label>
-          <input data-media="${si}:${ii}" data-k="src" value="${esc(m.src)}" placeholder="assets/img/name.jpg or YouTube ID">
-        </div>
-        <div class="field"><label>Poster image (video only)</label>
-          <input data-media="${si}:${ii}" data-k="poster" value="${esc(m.poster)}" placeholder="assets/img/name.jpg">
-        </div>
+        <div class="field"><label>Where it was shown — one per line</label><textarea data-list="${key}" data-k="venues">${esc((it.venues || []).join("\n"))}</textarea></div>
+        <div class="field"><label>Credits — one per line</label><textarea data-list="${key}" data-k="credits">${esc((it.credits || []).join("\n"))}</textarea></div>
       </div>
-      <div class="field"><label>Description</label><textarea data-i="${si}:${ii}" data-k="description">${esc(it.description)}</textarea></div>
-      <div class="row">
-        <div class="field"><label>Performed at — one per line</label><textarea data-list="${si}:${ii}" data-k="venues">${esc((it.venues||[]).join("\n"))}</textarea></div>
-        <div class="field"><label>Credits — one per line</label><textarea data-list="${si}:${ii}" data-k="credits">${esc((it.credits||[]).join("\n"))}</textarea></div>
-      </div>
-      <div class="field">
-        <label>URL slug</label><input data-i="${si}:${ii}" data-k="slug" value="${esc(it.slug)}">
-        <p class="hint">Page address: <code>/work/${esc(it.slug)}/</code></p>
-      </div>
-      <label style="display:flex;gap:.5rem;align-items:center;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:.9rem;color:var(--text)">
-        <input type="checkbox" data-pub="${si}:${ii}" ${it.published !== false ? "checked" : ""} style="width:auto">
-        Show on the site
+      <label class="check" style="margin-bottom:.75rem">
+        <input type="checkbox" data-pub="${key}" ${it.published !== false ? "checked" : ""}>
+        <span>Show on the site</span>
       </label>
+      <details><summary class="hint" style="cursor:pointer">Advanced</summary>
+        <div class="field" style="margin-top:.75rem">
+          <label>Web address (slug)</label><input data-i="${key}" data-k="slug" value="${esc(it.slug || "")}">
+          <p class="hint">Its own page lives at <code>/work/${esc(it.slug || "")}/</code>. Filled in automatically from the title.</p>
+        </div>
+      </details>
     </div>
   </details>`;
 }
 
-function renderSections() {
-  $("sectionList").innerHTML = site.sections.map((s, si) => `
-    <h3 style="font-size:1rem;margin:1.75rem 0 .75rem;letter-spacing:-.01em">${esc(s.title)}</h3>
+function sectionCard(s, si) {
+  return `<div class="seccard">
+    <div class="seccard__head">
+      <div class="field"><label>Section name</label><input data-sec="${si}" data-k="title" value="${esc(s.title || "")}"></div>
+      <div class="field"><label>Small note under the name (optional)</label><input data-sec="${si}" data-k="note" value="${esc(s.note || "")}"></div>
+      <div class="seccard__ctl">
+        <button class="small" data-secmove="${si}:-1" title="Move section up">↑</button>
+        <button class="small" data-secmove="${si}:1" title="Move section down">↓</button>
+        <button class="danger small" data-secdel="${si}">Delete section</button>
+      </div>
+    </div>
     ${s.items.map((it, ii) => itemForm(si, ii, it)).join("")}
-    <button data-add="${si}">Add to ${esc(s.title)}</button>
-  `).join("");
+    <button data-add="${si}">+ Add to ${esc(s.title || "this section")}</button>
+  </div>`;
+}
+
+function renderSections() {
+  $("sectionList").innerHTML = site.sections.map(sectionCard).join("");
+}
+
+/* ---------- render: stills ---------- */
+
+function renderStills() {
+  $("stillList").innerHTML = site.stills.map((s, i) => `
+    <div class="stillcard">
+      ${s.src ? `<img src="${raw(s.src)}" alt="">` : `<div style="aspect-ratio:3/4;background:var(--field);border-radius:3px"></div>`}
+      ${fileSelect("image", `data-still="${i}" data-k="src"`, s.src || "")}
+      <input data-still="${i}" data-k="alt" value="${esc(s.alt || "")}" placeholder="Describe the photo (for accessibility)">
+      <div class="ctl">
+        <button class="small" data-stillmove="${i}:-1" title="Move left">←</button>
+        <button class="small" data-stillmove="${i}:1" title="Move right">→</button>
+        <button class="danger small" data-stilldel="${i}" style="margin-left:auto">Remove</button>
+      </div>
+    </div>`).join("");
+}
+
+/* ---------- render: hero, about, files ---------- */
+
+function renderHero() {
+  $("heroVideo").innerHTML = fileSelect("video", `data-hero data-k="video"`, site.hero.video || "");
+  $("heroPoster").innerHTML = fileSelect("image", `data-hero data-k="poster"`, site.hero.poster || "");
+  $("aboutPortrait").innerHTML = fileSelect("image", `data-about data-k="portrait"`, site.about.portrait || "");
+}
+
+function renderFiles() {
+  const cell = (p, isVideo) => `<figure>
+    ${isVideo ? `<video src="${raw(p)}" muted playsinline preload="metadata"></video>` : `<img src="${raw(p)}" alt="" loading="lazy">`}
+    <figcaption>${esc(p.split("/").pop())}</figcaption>
+  </figure>`;
+  $("fileGrid").innerHTML =
+    images.map(p => cell(p, false)).join("") +
+    videos.map(p => cell(p, true)).join("");
+  document.querySelectorAll("#fileGrid video").forEach(v => {
+    v.style.width = "100%"; v.style.aspectRatio = "1"; v.style.objectFit = "cover"; v.style.borderRadius = "3px";
+  });
 }
 
 function render() {
-  $("f_name").value    = site.meta.name;
-  $("f_role").value    = site.meta.role;
-  $("f_desc").value    = site.meta.description;
+  $("f_name").value    = site.meta.name || "";
+  $("f_role").value    = site.meta.role || "";
+  $("f_desc").value    = site.meta.description || "";
   $("f_herocap").value = site.hero.caption || "";
-  $("f_about").value   = site.about.body.join("\n\n");
-  $("f_email").value   = site.contact.email;
-  $("f_phone").value   = site.contact.phone;
-  $("f_ig").value      = site.contact.instagram_handle;
-  $("f_igurl").value   = site.contact.instagram_url;
-  $("f_loc").value     = site.contact.location;
+  $("f_about").value   = (site.about.body || []).join("\n\n");
+  $("f_email").value   = site.contact.email || "";
+  $("f_phone").value   = site.contact.phone || "";
+  $("f_ig").value      = site.contact.instagram_handle || "";
+  $("f_igurl").value   = site.contact.instagram_url || "";
+  $("f_loc").value     = site.contact.location || "";
+  renderHero();
   renderEdu();
   renderSections();
+  renderStills();
+  renderFiles();
 }
 
-/* ---------- collect ---------- */
+/* ---------- collect fixed fields ---------- */
 
 function collect() {
   site.meta.name = $("f_name").value.trim();
@@ -287,50 +490,99 @@ function collect() {
   site.contact.instagram_handle = $("f_ig").value.trim();
   site.contact.instagram_url = $("f_igurl").value.trim();
   site.contact.location = $("f_loc").value.trim();
+  /* normalise every youtube field: whole links become plain IDs */
+  for (const s of site.sections) for (const it of s.items) {
+    if (it.media?.type === "youtube" && it.media.src) it.media.src = ytId(it.media.src);
+  }
 }
 
-/* live-bind every field back into the model */
+/* ---------- live binding ---------- */
+
 document.addEventListener("input", (e) => {
   const t = e.target;
-  const set = (attr, fn) => {
-    if (!t.dataset[attr]) return false;
+  if (t.closest("#gate")) return;
+  markDirty();
+
+  const pair = (attr, fn) => {
+    if (t.dataset[attr] === undefined) return false;
     const [si, ii] = t.dataset[attr].split(":").map(Number);
     fn(site.sections[si].items[ii]);
     return true;
   };
+
   if (t.dataset.edu !== undefined) {
     site.education[Number(t.dataset.edu)][t.dataset.k] = t.value;
-  } else if (set("i", (it) => {
+  } else if (t.dataset.sec !== undefined) {
+    site.sections[Number(t.dataset.sec)][t.dataset.k] = t.value;
+  } else if (t.dataset.still !== undefined) {
+    site.stills[Number(t.dataset.still)][t.dataset.k] = t.value;
+  } else if (t.dataset.hero !== undefined) {
+    site.hero[t.dataset.k] = t.value;
+  } else if (t.dataset.about !== undefined) {
+    site.about[t.dataset.k] = t.value;
+  } else if (pair("i", (it) => {
     const k = t.dataset.k;
     it[k] = k === "duration_min" ? (t.value === "" ? null : Number(t.value)) : t.value;
-  })) {} else if (set("media", (it) => { it.media = it.media || {}; it.media[t.dataset.k] = t.value; })) {}
-  else if (set("list", (it) => { it[t.dataset.k] = t.value.split("\n").map(s => s.trim()).filter(Boolean); })) {}
-  else if (set("pub", (it) => { it.published = t.checked; })) {}
+  })) {} else if (pair("media", (it) => { it.media = it.media || {}; it.media[t.dataset.k] = t.value; })) {}
+  else if (pair("list", (it) => { it[t.dataset.k] = t.value.split("\n").map(s => s.trim()).filter(Boolean); })) {}
+  else if (pair("pub", (it) => { it.published = t.checked; })) {}
 });
 
-/* ---------- buttons ---------- */
+/* selects that should refresh previews, plus the upload shortcut */
+document.addEventListener("change", (e) => {
+  const t = e.target;
+  if (t.closest("#gate")) return;
+
+  if (t.tagName === "SELECT" && t.value === "__upload__") {
+    pendingBind = {
+      media: t.dataset.media, still: t.dataset.still,
+      hero: t.dataset.hero, about: t.dataset.about,
+      k: t.dataset.k, kind: t.dataset.kind,
+    };
+    render(); // put the select back to its saved value while the picker is open
+    $("uploader").accept = t.dataset.kind === "video" ? "video/mp4,video/webm" : "image/*";
+    $("uploader").multiple = false;
+    $("uploader").click();
+    return;
+  }
+
+  /* auto-fill the slug from the title while it still looks auto-made */
+  if (t.dataset.i !== undefined && t.dataset.k === "title") {
+    const [si, ii] = t.dataset.i.split(":").map(Number);
+    const it = site.sections[si].items[ii];
+    if (!it.slug || /^new-work-/.test(it.slug)) { it.slug = slugify(it.title) || it.slug; renderSections(); }
+    else renderSections(); // refresh the summary line
+    return;
+  }
+
+  if (t.dataset.rerender !== undefined) render();
+});
+
+/* ---------- structural buttons ---------- */
 
 document.addEventListener("click", (e) => {
   const b = e.target.closest("button");
-  if (!b) return;
+  if (!b || b.closest("#gate")) return;
 
   if (b.dataset.add !== undefined) {
-    const si = Number(b.dataset.add);
-    site.sections[si].items.push({
+    site.sections[Number(b.dataset.add)].items.push({
       slug: "new-work-" + Date.now().toString(36),
-      title: "New work", status: "", year: String(new Date().getFullYear()),
+      title: "", status: "", year: String(new Date().getFullYear()),
       role: "", duration_min: null,
       media: { type: "image", src: "", poster: "" },
       description: "", venues: [], credits: [], published: false,
     });
-    renderSections();
+    markDirty(); renderSections();
+    const cards = document.querySelectorAll(`#sectionList .seccard`)[Number(b.dataset.add)];
+    cards?.querySelector("details.item:last-of-type")?.setAttribute("open", "");
   }
 
   if (b.dataset.del) {
     const [si, ii] = b.dataset.del.split(":").map(Number);
-    if (confirm(`Remove “${site.sections[si].items[ii].title}”? This is not undone until you publish.`)) {
+    const it = site.sections[si].items[ii];
+    if (confirm(`Remove “${it.title || "this work"}”?\n\nIt disappears from the editor now, and from the site when you publish.`)) {
       site.sections[si].items.splice(ii, 1);
-      renderSections();
+      markDirty(); renderSections();
     }
   }
 
@@ -340,61 +592,140 @@ document.addEventListener("click", (e) => {
     const j = ii + dir;
     if (j < 0 || j >= list.length) return;
     [list[ii], list[j]] = [list[j], list[ii]];
-    renderSections();
+    markDirty(); renderSections();
   }
 
-  if (b.dataset.edudel) {
+  if (b.dataset.secdel !== undefined) {
+    const si = Number(b.dataset.secdel);
+    const s = site.sections[si];
+    const n = s.items.length;
+    if (confirm(`Delete the whole “${s.title}” section${n ? ` and the ${n} work${n > 1 ? "s" : ""} inside it` : ""}?\n\nThis takes effect on the site when you publish.`)) {
+      site.sections.splice(si, 1);
+      markDirty(); renderSections();
+    }
+  }
+
+  if (b.dataset.secmove) {
+    const [si, dir] = b.dataset.secmove.split(":").map(Number);
+    const j = si + dir;
+    if (j < 0 || j >= site.sections.length) return;
+    [site.sections[si], site.sections[j]] = [site.sections[j], site.sections[si]];
+    markDirty(); renderSections();
+  }
+
+  if (b.dataset.stilldel !== undefined) {
+    site.stills.splice(Number(b.dataset.stilldel), 1);
+    markDirty(); renderStills();
+  }
+
+  if (b.dataset.stillmove) {
+    const [i, dir] = b.dataset.stillmove.split(":").map(Number);
+    const j = i + dir;
+    if (j < 0 || j >= site.stills.length) return;
+    [site.stills[i], site.stills[j]] = [site.stills[j], site.stills[i]];
+    markDirty(); renderStills();
+  }
+
+  if (b.dataset.edudel !== undefined) {
     site.education.splice(Number(b.dataset.edudel), 1);
-    renderEdu();
+    markDirty(); renderEdu();
   }
 });
 
 $("addEdu").onclick = () => {
   site.education.push({ qualification: "", years: "", institution: "" });
-  renderEdu();
+  markDirty(); renderEdu();
+  document.querySelector("#eduList details.item:last-of-type")?.setAttribute("open", "");
 };
 
-/* auto-slug from title when the slug still looks auto-generated */
-document.addEventListener("change", (e) => {
-  const t = e.target;
-  if (t.dataset.i && t.dataset.k === "title") {
-    const [si, ii] = t.dataset.i.split(":").map(Number);
+$("addSec").onclick = () => {
+  const title = $("newSecTitle").value.trim();
+  if (!title) { $("newSecTitle").focus(); return; }
+  let id = slugify(title) || "section";
+  while (site.sections.some(s => s.id === id)) id += "-2";
+  site.sections.push({ id, title, note: "", items: [] });
+  $("newSecTitle").value = "";
+  markDirty(); renderSections();
+  document.querySelector("#sectionList .seccard:last-of-type")?.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
+$("addStill").onclick = () => {
+  site.stills.push({ src: "", alt: "" });
+  markDirty(); renderStills();
+};
+
+/* ---------- uploads ---------- */
+
+async function uploadFile(file) {
+  const isVideo = file.type.startsWith("video");
+  const max = isVideo ? 20 * 1024 * 1024 : 8 * 1024 * 1024;
+  if (file.size > max) throw new Error(`“${file.name}” is too big (max ${isVideo ? 20 : 8} MB). Try a smaller version.`);
+  const ext = file.name.split(".").pop().toLowerCase();
+  const name = (slugify(file.name.replace(/\.[^.]+$/, "")) || "file-" + Date.now().toString(36)) + "." + ext;
+  const path = (isVideo ? "assets/video/" : "assets/img/") + name;
+
+  const b64 = await new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(",")[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+  let existing = null;
+  try { existing = (await gh(path)).sha; } catch { /* new file */ }
+  await gh(path, {
+    method: "PUT",
+    body: JSON.stringify({
+      message: `Add ${isVideo ? "video" : "image"} ${name}`,
+      content: b64,
+      ...(existing ? { sha: existing } : {}),
+    }),
+  });
+  const list = isVideo ? videos : images;
+  if (!list.includes(path)) { list.push(path); list.sort(); }
+  return path;
+}
+
+function assignUploaded(bind, path) {
+  if (!bind) return;
+  if (bind.media !== undefined && bind.media !== null) {
+    const [si, ii] = bind.media.split(":").map(Number);
     const it = site.sections[si].items[ii];
-    if (/^new-work-/.test(it.slug)) { it.slug = slugify(it.title); renderSections(); }
+    it.media = it.media || {};
+    it.media[bind.k] = path;
+  } else if (bind.still !== undefined && bind.still !== null) {
+    site.stills[Number(bind.still)][bind.k] = path;
+  } else if (bind.hero !== undefined && bind.hero !== null) {
+    site.hero[bind.k] = path;
+  } else if (bind.about !== undefined && bind.about !== null) {
+    site.about[bind.k] = path;
   }
-});
+  markDirty();
+}
 
-/* ---------- image upload ---------- */
-
-$("f_upload").onchange = async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const name = slugify(file.name.replace(/\.[^.]+$/, "")) + "." + file.name.split(".").pop().toLowerCase();
-  const path = `assets/img/${name}`;
-  say("Uploading " + name + "…");
+$("uploader").onchange = async (e) => {
+  const files = [...e.target.files];
+  e.target.value = "";
+  if (!files.length) { pendingBind = null; return; }
+  const bind = pendingBind; pendingBind = null;
   try {
-    const b64 = await new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onload = () => res(r.result.split(",")[1]);
-      r.onerror = rej;
-      r.readAsDataURL(file);
-    });
-    let existing = null;
-    try { existing = (await gh(path)).sha; } catch { /* new file */ }
-    await gh(path, {
-      method: "PUT",
-      body: JSON.stringify({
-        message: `Add image ${name}`,
-        content: b64,
-        ...(existing ? { sha: existing } : {}),
-      }),
-    });
-    $("uploadHint").innerHTML = `Uploaded. Paste this into a Media field: <code>${esc(path)}</code>`;
-    say("Image uploaded", "ok");
+    for (let i = 0; i < files.length; i++) {
+      say(`Uploading ${files[i].name}${files.length > 1 ? ` (${i + 1} of ${files.length})` : ""}…`);
+      const path = await uploadFile(files[i]);
+      if (i === 0) assignUploaded(bind, path);
+    }
+    say("Uploaded ✓", "ok");
+    render();
   } catch (err) {
     say(err.message, "err");
+    render();
   }
-  e.target.value = "";
+};
+
+$("uploadBtn").onclick = () => {
+  pendingBind = null;
+  $("uploader").accept = "image/*,video/mp4,video/webm";
+  $("uploader").multiple = true;
+  $("uploader").click();
 };
 
 /* ---------- publish ---------- */
@@ -405,20 +736,26 @@ $("publish").onclick = async () => {
   say("Publishing…");
   try {
     await save();
-    say("Published. The site rebuilds in about a minute.", "ok");
+    clearDirty();
+    say("Published ✓ — the site updates itself in a minute or two.", "ok");
   } catch (err) {
-    say(err.message.includes("does not match") ? "Someone else changed the content. Reload and redo your edits." : err.message, "err");
+    say(err.message.includes("does not match")
+      ? "The content changed somewhere else (maybe another tab). Reload this page and redo your edits."
+      : err.message, "err");
   }
   $("publish").disabled = false;
 };
 
 $("preview").onclick = () => {
   const [owner, name] = repo.split("/");
-  window.open(`https://${owner}.github.io/${name === owner + ".github.io" ? "" : name + "/"}`, "_blank");
+  window.open(`https://${owner.toLowerCase()}.github.io/${name === (owner + ".github.io").toLowerCase() ? "" : name + "/"}`, "_blank");
 };
 
 $("signout").onclick = () => {
+  if (dirty && !confirm("You have unpublished changes that will be lost. Sign out anyway?")) return;
+  dirty = false;
   localStorage.removeItem("pv_token");
+  sessionStorage.removeItem("pv_token");
   location.reload();
 };
 
@@ -432,25 +769,30 @@ async function boot() {
     $("app").classList.remove("hide");
     render();
   } catch (err) {
-    $("gateStatus").textContent = err.message;
+    $("gateStatus").textContent =
+      /401|credentials|Unauthorized/i.test(err.message)
+        ? "That key was not accepted. Check it was copied completely, and that it has not expired."
+        : err.message;
     localStorage.removeItem("pv_token");
+    sessionStorage.removeItem("pv_token");
+    $("gate").classList.remove("hide");
+    $("app").classList.add("hide");
   }
 }
 
-$("signin").onclick = async () => {
-  repo = $("repo").value.trim().replace(/^https?:\/\/github\.com\//, "").replace(/\/$/, "");
+$("signin").onclick = () => {
+  const r = $("repo").value.trim().replace(/^https?:\/\/github\.com\//, "").replace(/\/$/, "");
+  if (r) repo = r;
   token = $("token").value.trim();
-  if (!repo.includes("/") || !token) {
-    $("gateStatus").textContent = "Enter both the repository and a token.";
-    return;
-  }
+  if (!token) { $("gateStatus").textContent = "Paste the access key first."; return; }
   localStorage.setItem("pv_repo", repo);
-  localStorage.setItem("pv_token", token);
+  if ($("remember").checked) localStorage.setItem("pv_token", token);
+  else sessionStorage.setItem("pv_token", token);
   boot();
 };
 
-if (repo && token) { $("repo").value = repo; boot(); }
-else if (repo) { $("repo").value = repo; }
+$("repo").value = repo;
+if (token) boot();
 </script>
 </body>
 </html>

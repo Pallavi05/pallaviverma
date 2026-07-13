@@ -21,7 +21,7 @@ const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">`;
 
-function head({ title, description, base = "", canonical = "", image = "" }) {
+function head({ title, description, base = "", canonical = "", image = "", jsonld = null }) {
   const img = image ? `${site.meta.url.replace(/\/$/, "")}/${image}` : "";
   return `<!doctype html>
 <html lang="en">
@@ -30,17 +30,66 @@ function head({ title, description, base = "", canonical = "", image = "" }) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
+<meta name="author" content="${esc(site.meta.name)}">
 ${canonical ? `<link rel="canonical" href="${esc(canonical)}">` : ""}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="${esc(site.meta.name)}">
+${canonical ? `<meta property="og:url" content="${esc(canonical)}">` : ""}
 ${img ? `<meta property="og:image" content="${esc(img)}">` : ""}
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(description)}">
+${img ? `<meta name="twitter:image" content="${esc(img)}">` : ""}
+${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, "\\u003c")}</script>` : ""}
 ${FONTS}
 <link rel="stylesheet" href="${base}assets/css/styles.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>`;
+}
+
+/* ---------- structured data ---------- */
+
+function personLd() {
+  const b = site.meta.url.replace(/\/$/, "");
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.meta.name,
+    jobTitle: site.meta.role.split("·").map((r) => r.trim()),
+    description: site.meta.description,
+    url: b,
+    image: `${b}/${site.about.portrait}`,
+    email: `mailto:${site.contact.email}`,
+    telephone: site.contact.phone,
+    sameAs: [site.contact.instagram_url].filter(Boolean),
+    address: { "@type": "PostalAddress", addressLocality: site.contact.location },
+    alumniOf: site.education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.institution })),
+    knowsAbout: [
+      "Movement practice", "Movement direction", "Choreography",
+      "Contemporary dance", "Kathak", "Physical theatre", "Somatics",
+      "Improvisation", "Embodied practice", "Dance film", "Movement research",
+    ],
+  };
+}
+
+function workLd(item, section) {
+  const b = site.meta.url.replace(/\/$/, "");
+  const img = item.media?.type === "image" ? item.media.src : item.media?.poster || "";
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: item.title,
+    url: `${b}/work/${item.slug}/`,
+    genre: section.title,
+    ...(item.year ? { dateCreated: String(item.year) } : {}),
+    ...(item.description ? { description: item.description } : {}),
+    ...(img ? { image: `${b}/${img}` } : {}),
+    ...(item.duration_min ? { duration: `PT${item.duration_min}M` } : {}),
+    creator: { "@type": "Person", name: site.meta.name, url: b },
+  };
 }
 
 function foot() {
@@ -143,6 +192,7 @@ ${s.note ? `<p class="section__note">${esc(s.note)}</p>` : ""}
     description: site.meta.description,
     canonical: site.meta.url,
     image: site.hero.poster,
+    jsonld: personLd(),
   })}
 
 <main id="main">
@@ -187,7 +237,10 @@ ${sections}
 <div class="section__head"><h2>Stills</h2></div>
 <div class="stills">
 ${site.stills
-  .map((s) => `<img src="${esc(s.src)}" alt="${esc(s.alt)}" loading="lazy" decoding="async">`)
+  .map(
+    (s, i) =>
+      `<button class="still" type="button" aria-label="View photo ${i + 1} of ${site.stills.length} full screen"><img src="${esc(s.src)}" alt="${esc(s.alt)}" loading="lazy" decoding="async"></button>`
+  )
   .join("")}
 </div>
 </section>
@@ -203,6 +256,55 @@ ${site.stills
 </section>
 
 </main>
+
+<div class="lb" id="lb" hidden>
+<button class="lb__close" type="button" aria-label="Close">Close ✕</button>
+<button class="lb__prev" type="button" aria-label="Previous photo">←</button>
+<img class="lb__img" id="lbImg" alt="">
+<button class="lb__next" type="button" aria-label="Next photo">→</button>
+<span class="lb__count" id="lbCount"></span>
+</div>
+<script>
+(function () {
+  var lb = document.getElementById("lb");
+  var imgEl = document.getElementById("lbImg");
+  var countEl = document.getElementById("lbCount");
+  var thumbs = Array.prototype.slice.call(document.querySelectorAll(".still"));
+  if (!lb || !thumbs.length) return;
+  var cur = 0, lastFocus = null;
+  function show(i) {
+    cur = (i + thumbs.length) % thumbs.length;
+    var im = thumbs[cur].querySelector("img");
+    imgEl.src = im.currentSrc || im.src;
+    imgEl.alt = im.alt;
+    countEl.textContent = (cur + 1) + " / " + thumbs.length;
+  }
+  function open(i) {
+    lastFocus = document.activeElement;
+    show(i);
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    lb.querySelector(".lb__close").focus();
+  }
+  function close() {
+    lb.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  }
+  thumbs.forEach(function (b, i) { b.addEventListener("click", function () { open(i); }); });
+  lb.addEventListener("click", function (e) {
+    if (e.target.closest(".lb__prev")) return show(cur - 1);
+    if (e.target.closest(".lb__next")) return show(cur + 1);
+    if (e.target === lb || e.target.closest(".lb__close")) return close();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (lb.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") show(cur - 1);
+    else if (e.key === "ArrowRight") show(cur + 1);
+  });
+})();
+</script>
 ${foot()}`;
 }
 
@@ -219,6 +321,7 @@ function workPage(item, section) {
     base,
     canonical: `${site.meta.url.replace(/\/$/, "")}/work/${item.slug}/`,
     image: item.media?.type === "image" ? item.media.src : item.media?.poster || "",
+    jsonld: workLd(item, section),
   })}
 <main id="main" class="detail">
 <a class="detail__back" href="${base}#${esc(section.id)}">← ${esc(section.title)}</a>
@@ -273,6 +376,6 @@ for (const section of site.sections) {
 }
 
 writeFileSync(join(ROOT, "sitemap.xml"), sitemap(urls));
-writeFileSync(join(ROOT, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${site.meta.url.replace(/\/$/, "")}/sitemap.xml\n`);
+writeFileSync(join(ROOT, "robots.txt"), `User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: ${site.meta.url.replace(/\/$/, "")}/sitemap.xml\n`);
 
 console.log(`built index.html + ${n} work pages + sitemap.xml`);

@@ -252,7 +252,40 @@ a:focus-visible, button:focus-visible {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
   gap: clamp(1rem, 2.5vw, 2.5rem);
 }
+.still { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.still:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
 .stills img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.still img { transition: opacity 300ms ease; }
+.still:hover img { opacity: 0.85; }
+
+/* ---------------- lightbox ---------------- */
+
+.lb {
+  position: fixed; inset: 0; z-index: 60;
+  background: rgba(20, 20, 20, 0.96);
+  display: flex; align-items: center; justify-content: center;
+}
+.lb[hidden] { display: none; }
+.lb__img {
+  max-width: min(92vw, 100rem); max-height: 86vh;
+  width: auto; height: auto; object-fit: contain;
+}
+.lb button {
+  position: absolute; z-index: 1;
+  background: none; border: 0; cursor: pointer;
+  color: var(--text);
+  font-family: var(--mono); font-size: 1rem; letter-spacing: 0.08em;
+  padding: 1rem;
+}
+.lb button:hover { color: var(--accent); }
+.lb__close { top: 0.5rem; right: 0.75rem; font-size: 0.8rem; text-transform: uppercase; }
+.lb__prev { left: 0.25rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; }
+.lb__next { right: 0.25rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; }
+.lb__count {
+  position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em;
+  color: var(--muted);
+}
 
 /* ---------------- contact ---------------- */
 
