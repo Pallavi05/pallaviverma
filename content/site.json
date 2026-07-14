@@ -109,7 +109,9 @@
             "poster": "assets/img/green-park.jpg"
           },
           "description": "Choreographed and performed in collaboration with the music band Green Park, set to their music, on the themes of aging, existential crisis and loneliness.",
-          "venues": [],
+          "venues": [
+            "Oddbird Theatre, Delhi"
+          ],
           "credits": [],
           "published": true
         },
@@ -166,14 +168,14 @@
           "title": "Dance Film",
           "status": "",
           "year": "2025",
-          "role": "Performer",
+          "role": "Performer & Choreographer",
           "duration_min": null,
           "media": {
             "type": "youtube",
             "src": "XS4ITeMg4L4",
             "poster": ""
           },
-          "description": "Made as part of the Sunil Kothari Emerging Artist Award 2025.",
+          "description": "Made as part of the Dr. Sunil Kothari Emerging Artist Award 2025.",
           "venues": [],
           "credits": [],
           "published": true
@@ -388,7 +390,7 @@
           "duration_min": null,
           "media": {
             "type": "image",
-            "src": "__upload__",
+            "src": "assets/img/workshopwebsite-2.jpeg",
             "poster": ""
           },
           "description": "",
