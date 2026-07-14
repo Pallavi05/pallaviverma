@@ -399,6 +399,32 @@
           "published": false
         }
       ]
+    },
+    {
+      "id": "press",
+      "title": "Press",
+      "note": "Media coverage, residencies ",
+      "items": [
+        {
+          "slug": "serendipity-arts",
+          "title": "Serendipity Arts",
+          "status": "Work in Progress",
+          "year": "2026",
+          "role": "Choreographer",
+          "duration_min": 20,
+          "media": {
+            "type": "image",
+            "src": "assets/img/call-and-response.jpg",
+            "poster": ""
+          },
+          "description": "This was sponored by serndipity arts",
+          "venues": [
+            "Bangalore, Goa"
+          ],
+          "credits": [],
+          "published": true
+        }
+      ]
     }
   ],
   "stills": [
