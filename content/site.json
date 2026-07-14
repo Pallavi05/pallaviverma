@@ -34,7 +34,7 @@
     {
       "id": "performance",
       "title": "Performance",
-      "note": "Stage and site works, as performer and choreographer.",
+      "note": "",
       "items": [
         {
           "slug": "wildflower",
@@ -269,6 +269,132 @@
           "venues": [],
           "credits": [],
           "published": true
+        }
+      ]
+    },
+    {
+      "id": "workshops",
+      "title": "Workshops",
+      "note": "",
+      "items": [
+        {
+          "slug": "head-to-toe",
+          "title": "Head to Toe ",
+          "status": "",
+          "year": "2026",
+          "role": "Facilitator",
+          "duration_min": null,
+          "media": {
+            "type": "image",
+            "src": "assets/img/headtotoeworkshop.png",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": false
+        },
+        {
+          "slug": "sushant-university",
+          "title": "Sushant University",
+          "status": "",
+          "year": "2026",
+          "role": "",
+          "duration_min": null,
+          "media": {
+            "type": "image",
+            "src": "assets/img/sushant-university-poster.jpg",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": false
+        },
+        {
+          "slug": "expressing-through-body-movements",
+          "title": "Expressing Through Body Movements",
+          "status": "",
+          "year": "2026",
+          "role": "",
+          "duration_min": null,
+          "media": {
+            "type": "image",
+            "src": "assets/img/expressing.png",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": false
+        },
+        {
+          "slug": "body-and-space",
+          "title": "Body and Space",
+          "status": "",
+          "year": "2026",
+          "role": "",
+          "duration_min": null,
+          "media": {
+            "type": "image",
+            "src": "assets/img/583167514-18029276066746211-4552865055773672981-n.webp",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": false
+        },
+        {
+          "slug": "chandigarh-workshop",
+          "title": "Chandigarh Workshop ",
+          "status": "",
+          "year": "2026",
+          "role": "",
+          "duration_min": null,
+          "media": {
+            "type": "image",
+            "src": "assets/img/select-1.jpg",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": false
+        },
+        {
+          "slug": "delhi-workshops",
+          "title": "Delhi Workshops",
+          "status": "",
+          "year": "2026",
+          "role": "",
+          "duration_min": null,
+          "media": {
+            "type": "image",
+            "src": "assets/img/website-workshop1.jpeg",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": false
+        },
+        {
+          "slug": "delhi-workshops",
+          "title": "Delhi Workshops",
+          "status": "",
+          "year": "2026",
+          "role": "",
+          "duration_min": null,
+          "media": {
+            "type": "image",
+            "src": "__upload__",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": false
         }
       ]
     }
