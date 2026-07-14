@@ -300,7 +300,7 @@
           "slug": "sushant-university",
           "title": "Sushant University",
           "status": "",
-          "year": "2026",
+          "year": "2025",
           "role": "",
           "duration_min": null,
           "media": {
@@ -317,7 +317,7 @@
           "slug": "expressing-through-body-movements",
           "title": "Expressing Through Body Movements",
           "status": "",
-          "year": "2026",
+          "year": "2025",
           "role": "",
           "duration_min": null,
           "media": {
@@ -334,7 +334,7 @@
           "slug": "body-and-space",
           "title": "Body and Space",
           "status": "",
-          "year": "2026",
+          "year": "2025",
           "role": "",
           "duration_min": null,
           "media": {
@@ -351,7 +351,7 @@
           "slug": "chandigarh-workshop",
           "title": "Chandigarh Workshop ",
           "status": "",
-          "year": "2026",
+          "year": "2025",
           "role": "",
           "duration_min": null,
           "media": {
@@ -366,7 +366,7 @@
         },
         {
           "slug": "delhi-workshops",
-          "title": "Delhi Workshops",
+          "title": "Delhi Workshop",
           "status": "",
           "year": "2026",
           "role": "",
@@ -374,23 +374,6 @@
           "media": {
             "type": "image",
             "src": "assets/img/website-workshop1.jpeg",
-            "poster": ""
-          },
-          "description": "",
-          "venues": [],
-          "credits": [],
-          "published": true
-        },
-        {
-          "slug": "delhi-workshops",
-          "title": "Delhi Workshops",
-          "status": "",
-          "year": "2026",
-          "role": "",
-          "duration_min": null,
-          "media": {
-            "type": "image",
-            "src": "assets/img/workshopwebsite-2.jpeg",
             "poster": ""
           },
           "description": "",
