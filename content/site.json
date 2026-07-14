@@ -294,7 +294,7 @@
           "description": "",
           "venues": [],
           "credits": [],
-          "published": false
+          "published": true
         },
         {
           "slug": "sushant-university",
@@ -311,7 +311,7 @@
           "description": "",
           "venues": [],
           "credits": [],
-          "published": false
+          "published": true
         },
         {
           "slug": "expressing-through-body-movements",
@@ -328,7 +328,7 @@
           "description": "",
           "venues": [],
           "credits": [],
-          "published": false
+          "published": true
         },
         {
           "slug": "body-and-space",
@@ -345,7 +345,7 @@
           "description": "",
           "venues": [],
           "credits": [],
-          "published": false
+          "published": true
         },
         {
           "slug": "chandigarh-workshop",
@@ -362,7 +362,7 @@
           "description": "",
           "venues": [],
           "credits": [],
-          "published": false
+          "published": true
         },
         {
           "slug": "delhi-workshops",
@@ -379,7 +379,7 @@
           "description": "",
           "venues": [],
           "credits": [],
-          "published": false
+          "published": true
         },
         {
           "slug": "delhi-workshops",
@@ -396,7 +396,7 @@
           "description": "",
           "venues": [],
           "credits": [],
-          "published": false
+          "published": true
         }
       ]
     },
