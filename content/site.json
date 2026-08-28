@@ -155,6 +155,23 @@
             "Choreographed by Aseng Borang"
           ],
           "published": true
+        },
+        {
+          "slug": "sound-of-jayamiti-version-2",
+          "title": "Sound of Jayamiti (Version 2)",
+          "status": "",
+          "year": "2026",
+          "role": "Co Choreographer and Performer",
+          "duration_min": null,
+          "media": {
+            "type": "video",
+            "src": "assets/video/soj.mp4",
+            "poster": ""
+          },
+          "description": "A duet choreography intersecting geometry, body percussion and experimentation with kathak bols.",
+          "venues": [],
+          "credits": [],
+          "published": true
         }
       ]
     },
