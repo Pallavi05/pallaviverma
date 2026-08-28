@@ -164,8 +164,8 @@
           "role": "Co Choreographer and Performer",
           "duration_min": null,
           "media": {
-            "type": "video",
-            "src": "assets/video/soj.mp4",
+            "type": "youtube",
+            "src": "drHSYq4deWQ",
             "poster": ""
           },
           "description": "A duet choreography intersecting geometry, body percussion and experimentation with kathak bols.",
