@@ -288,6 +288,23 @@
           "venues": [],
           "credits": [],
           "published": true
+        },
+        {
+          "slug": "eka-campaign-movement-direction",
+          "title": "EKA Campaign Movement Direction",
+          "status": "",
+          "year": "2025",
+          "role": "Movement Director",
+          "duration_min": null,
+          "media": {
+            "type": "youtube",
+            "src": "N6HWV_Igxvg",
+            "poster": ""
+          },
+          "description": "",
+          "venues": [],
+          "credits": [],
+          "published": true
         }
       ]
     },
