@@ -78,20 +78,37 @@
           "published": true
         },
         {
-          "slug": "call-and-response",
-          "title": "Call and Response",
+          "slug": "sound-of-jayamiti-version-2",
+          "title": "Sound of Jayamiti (Version 2)",
           "status": "",
-          "year": "2024",
-          "role": "Performer",
+          "year": "2023",
+          "role": "Co Choreographer and Performer",
           "duration_min": null,
           "media": {
-            "type": "video",
-            "src": "assets/video/call-and-response.mp4",
-            "poster": "assets/img/call-and-response.jpg"
+            "type": "youtube",
+            "src": "drHSYq4deWQ",
+            "poster": ""
           },
-          "description": "An improvised collaborative performance that blends music and dance, examining our physical reactions to soundscapes present in both natural and urban environments. It investigates the interplay between dancers and musicians, contemplating the comfort we derive from birdsong contrasted with the discomfort of city noise.",
+          "description": "A duet choreography intersecting geometry, body percussion and experimentation with kathak bols.",
+          "venues": [],
+          "credits": [],
+          "published": true
+        },
+        {
+          "slug": "sound-of-jyamiti",
+          "title": "Sound of Jyamiti",
+          "status": "",
+          "year": "2022 – 2023",
+          "role": "Co-choreographer & performer",
+          "duration_min": 30,
+          "media": {
+            "type": "youtube",
+            "src": "eK164lXf50k",
+            "poster": ""
+          },
+          "description": "A duet piece exploring body percussion and experimentation with kathak bols.",
           "venues": [
-            "Max Muller Bhawan, Delhi Nov 2024"
+            "March Dance Festival, Chennai — 2023"
           ],
           "credits": [],
           "published": true
@@ -116,20 +133,20 @@
           "published": true
         },
         {
-          "slug": "sound-of-jyamiti",
-          "title": "Sound of Jyamiti",
+          "slug": "call-and-response",
+          "title": "Call and Response",
           "status": "",
-          "year": "2022 – 2023",
-          "role": "Co-choreographer & performer",
-          "duration_min": 30,
+          "year": "2024",
+          "role": "Performer",
+          "duration_min": null,
           "media": {
-            "type": "youtube",
-            "src": "eK164lXf50k",
-            "poster": ""
+            "type": "video",
+            "src": "assets/video/call-and-response.mp4",
+            "poster": "assets/img/call-and-response.jpg"
           },
-          "description": "A duet piece exploring body percussion and experimentation with kathak bols.",
+          "description": "An improvised collaborative performance that blends music and dance, examining our physical reactions to soundscapes present in both natural and urban environments. It investigates the interplay between dancers and musicians, contemplating the comfort we derive from birdsong contrasted with the discomfort of city noise.",
           "venues": [
-            "March Dance Festival, Chennai — 2023"
+            "Max Muller Bhawan, Delhi Nov 2024"
           ],
           "credits": [],
           "published": true
@@ -154,23 +171,6 @@
           "credits": [
             "Choreographed by Aseng Borang"
           ],
-          "published": true
-        },
-        {
-          "slug": "sound-of-jayamiti-version-2",
-          "title": "Sound of Jayamiti (Version 2)",
-          "status": "",
-          "year": "2026",
-          "role": "Co Choreographer and Performer",
-          "duration_min": null,
-          "media": {
-            "type": "youtube",
-            "src": "drHSYq4deWQ",
-            "poster": ""
-          },
-          "description": "A duet choreography intersecting geometry, body percussion and experimentation with kathak bols.",
-          "venues": [],
-          "credits": [],
           "published": true
         }
       ]
